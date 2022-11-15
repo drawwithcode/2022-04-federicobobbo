@@ -1,50 +1,64 @@
-var colors = ["#9ee493", "#6369d1", "#e2c044",
- "#E2725B", "#2e5266"]
+let slider;
+let speech = new p5.SpeechRec('en-US', parseResult) 
+speech.continuous = true
+speech.interimResults = false
 
 function setup() {
-  createCanvas(windowWidth,windowHeight);
+  createCanvas(window.innerWidth, window.innerHeight)
+  background(255)
+  slider = createSlider(10, 200, 55);
+  slider.position((width/2)-65, 60);
+  slider.style('width', '200')
+  setShakeThreshold(10);
+  fill(25)
+  textSize(24)
+  textAlign(CENTER)
+  textStyle(BOLDITALIC)
+  textFont('"Avenir Next", system-ui, sans-serif')
+  text('SAY A COLOR', width / 2, 40)
+  speech.start()
 }
 
-function draw() {
-  background("white")
-  for (let i=0; i<touches.length; i++){
-    const touch = touches[i];
+const colors = []
 
-    const color = colors[touch.id%colors.length]
+function draw() {	
+	let r = slider.value();
+  for (var i = 0; i < touches.length; i++) {
+	let col = speech.resultString.split(' ').pop().toUpperCase()
+    fill(col);
+	if(touches[i].y<130){
+		noFill()}
+	noStroke()
+	ellipse(touches[i].x, touches[i].y, r);
+  }
+}
 
-      fill(color)
-      noStroke()
-      ellipse(touch.x, touch.y, 100)
+function parseResult() {
+	if (speech.resultValue) {
+	  let color = speech.resultString.split(' ').pop().toUpperCase()
+	  colors.push(color)
+	  fill("white")
+	  noStroke()
+	  rect(0,0, width, 100)
+	  fill(color)
+	  text(color, width / 2, 40)
+	  console.log(colors)
+	}
   }
 
+  if (speech.resultValue === 'read'){
+	color = "red";
+	colors.push(color)
+	
+  }
+
+
+  function touchEnded(event) {
+	if(DeviceOrientationEvent && DeviceOrientationEvent.requestPermission) {
+		DeviceOrientationEvent.requestPermission()
+	}
 }
 
-
-
-// let myColor=10;
-
-// function setup() {
-// 	createCanvas(windowWidth, windowHeight)
-// 	console.log("Move me babeeee!")
-// 	// by defaults equals to 0.5
-// 	setMoveThreshold(2);
-// 	textSize(20)
-// 	textAlign(CENTER)
-// }
-
-// function draw() {
-// 	background(myColor)
-// 	text('Move to read me better', width/2, height/2)
-// }
-
-// function deviceMoved() {
-//   	myColor+=0.3;
-// 	if (myColor>255) myColor=10;
-// }	
-
-// // request permissions on iOS
-// function touchEnded(event) {
-// 	if(DeviceOrientationEvent && DeviceOrientationEvent.requestPermission) {
-// 		DeviceOrientationEvent.requestPermission()
-// 	}
-// }
+function touchStarted() {
+ 	return true;
+  }
