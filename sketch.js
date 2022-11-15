@@ -9,25 +9,14 @@ function draw() {
   background("white")
   for (let i=0; i<touches.length; i++){
     const touch = touches[i];
-    // use "i%colors.length" to cycle through colors array
-    // useful if you have more touch points than colors
-    // const color = colors[i%colors.length]
 
-    // Replacing "i" with "touch.id" ensures
-    // a better consistency in touch actions
-    // compare the two solutions
     const color = colors[touch.id%colors.length]
 
-    push()
       fill(color)
       noStroke()
       ellipse(touch.x, touch.y, 100)
-    pop()
   }
-  textSize(20);
-  textAlign(CENTER)
-  const display = touches.length+' touch points';
-  text(display, width/2, height/2)
+
 }
 
 
