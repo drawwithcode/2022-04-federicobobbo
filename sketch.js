@@ -14,7 +14,7 @@ function setup() {
     button.position(window.innerWidth-110, 18);
     button.mousePressed(saveDrawing);
 
-  slider = createSlider(1, 200, 100);
+  slider = createSlider(0.1, 200, 100);
   slider.position((width / 2)-60, 20);
   slider.style('width', '200')
   fill(25)
