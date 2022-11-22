@@ -4,7 +4,14 @@ html, body {
   overflow-x: hidden;
   user-select: none;
   touch-action: none;
-  -webkit-user-select: none;
+font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 60pt;
+  color: #000000;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 canvas {
@@ -13,4 +20,35 @@ canvas {
 
 body { 
   position: fixed;
+}
+
+
+.main {
+  position: fixed;
+  width: 80vw;
+  height: 80vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+  line-height: 107%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#txt1 {
+  display: flex;
+}
+
+#txt2 {
+  display: none;
+}
+
+#txt3 {
+  display: none;
+}
+
+#txt4 {
+  display: none;
 }

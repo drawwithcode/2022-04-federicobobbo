@@ -2,20 +2,26 @@ let slider;
 let speech = new p5.SpeechRec('en-US', parseResult) 
 speech.continuous = true
 speech.interimResults = false
+var validFontTypes = ['ttf', 'otf', 'woff', 'woff2']
+
 
 function setup() {
+  Oswald = loadFont('Assets/Font/Oswald/static/Oswald-Bold.ttf');
   createCanvas(window.innerWidth, window.innerHeight)
   background(255)
+
+    button = createButton('save image');
+    button.position(window.innerWidth-110, 18);
+    button.mousePressed(saveDrawing);
+
   slider = createSlider(10, 200, 55);
-  slider.position((width/2)-65, 60);
+  slider.position((width / 2)-60, 20);
   slider.style('width', '200')
-  setShakeThreshold(10);
   fill(25)
-  textSize(24)
+  textSize(20)
   textAlign(CENTER)
-  textStyle(BOLDITALIC)
-  textFont('"Avenir Next", system-ui, sans-serif')
-  text('SAY A COLOR', width / 2, 40)
+  textFont('Oswald');
+  text('SAY A COLOR', 80 , 38)
   speech.start()
 }
 
@@ -26,10 +32,13 @@ function draw() {
   for (var i = 0; i < touches.length; i++) {
 	let col = speech.resultString.split(' ').pop().toUpperCase()
     fill(col);
-	if(touches[i].y<130){
+	if(touches[i].y<90){
 		noFill()}
 	noStroke()
 	ellipse(touches[i].x, touches[i].y, r);
+  }
+  if (mouseIsPressed===true) {
+    ellipse(mouseX, mouseY, 50, 50);
   }
 }
 
@@ -39,9 +48,9 @@ function parseResult() {
 	  colors.push(color)
 	  fill("white")
 	  noStroke()
-	  rect(0,0, width, 100)
+	  rect(0,0, width, 60)
 	  fill(color)
-	  text(color, width / 2, 40)
+	  text(color, 80, 38)
 	  console.log(colors)
 	}
   }
@@ -53,12 +62,27 @@ function parseResult() {
   }
 
 
-  function touchEnded(event) {
-	if(DeviceOrientationEvent && DeviceOrientationEvent.requestPermission) {
-		DeviceOrientationEvent.requestPermission()
-	}
-}
-
 function touchStarted() {
  	return true;
+  }
+
+  // function setup() {
+  //   createCanvas(400, 400);
+  //   button = createButton('save image');
+  //   button.position(10, 410);
+  //   button.mousePressed(saveDrawing);
+    
+  //   background(0);
+  //   noFill();
+  //   stroke(255);
+  // }
+  
+  // function draw() {
+  //   if (mouseIsPressed===true) {
+  //     ellipse(mouseX, mouseY, 50, 50);
+  //   }
+  // }
+  
+  function saveDrawing() {
+    save("Picture.png");
   }

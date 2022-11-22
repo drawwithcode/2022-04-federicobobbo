@@ -5,10 +5,69 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
     <script src="p5.speech.js"></script>
+    <!-- <script src="p5.sound.min.js"></script> -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <script src="sketch.js"></script>
   </head>
   <body scroll="no" style="overflow: hidden">
-    <script src="sketch.js"></script>
+
+    <p class="main" id="txt1">
+      Draw <br />
+      and<br />
+      Learn <br />
+    </p>
+
+    <p class="main" id="txt2">
+      Say<br />
+      a color <br />
+      to use it<br />
+    </p>
+
+    <p class="main" id="txt3">
+      Adjust<br />
+      brush <br />
+      size<br />
+    </p>
+
+    <p class="main" id="txt4">
+      Be quiet<br />
+      or you draw <br />
+      will be erased<br />
+    </p>
+
   </body>
+
+  <script>
+    const txt1 = document.getElementById("txt1");
+    const txt2 = document.getElementById("txt2");
+    const txt3 = document.getElementById("txt3");
+    const txt4 = document.getElementById("txt4");
+
+    setTimeout(() => {
+      txt1.style.display = "none";
+      txt2.style.display = "flex";
+    }, 3000);
+
+    setTimeout(() => {
+      txt2.style.display = "none";
+      txt3.style.display = "flex";
+    }, 6000);
+
+    setTimeout(() => {
+      txt3.style.display = "none";
+      txt4.style.display = "flex";
+    }, 9000);
+
+    setTimeout(() => {
+      txt4.style.display = "none";
+    }, 12000);
+
+
+  </script>
 </html>
